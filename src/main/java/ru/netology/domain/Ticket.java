@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Comparator;
+
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
@@ -21,4 +23,5 @@ public class Ticket implements Comparable<Ticket> {
     public int compareTo(Ticket o) {
         return price - o.price;
     }
+
 }
