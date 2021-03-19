@@ -3,7 +3,10 @@ package ru.netology.manager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Ticket;
+import ru.netology.domain.TicketByPriceComparator;
 import ru.netology.repository.TicketRepository;
+
+import java.util.Comparator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,7 +34,7 @@ class TicketManagerTest {
         String airportTo = "DME";
 
         Ticket[] expected = new Ticket[0];
-        Ticket[] actual = manager.findAll(airportFrom, airportTo);
+        Ticket[] actual = manager.findAllPriceSort(airportFrom, airportTo);
         assertArrayEquals(expected, actual);
     }
 
@@ -41,7 +44,7 @@ class TicketManagerTest {
         String airportTo = "DME";
 
         Ticket[] expected = new Ticket[0];
-        Ticket[] actual = manager.findAll(airportFrom, airportTo);
+        Ticket[] actual = manager.findAllPriceSort(airportFrom, airportTo);
         assertArrayEquals(expected, actual);
     }
 
@@ -52,7 +55,28 @@ class TicketManagerTest {
         String airportTo = "SVX";
 
         Ticket[] expected = new Ticket[]{second, fourth, fifth};
-        Ticket[] actual = manager.findAll(airportFrom, airportTo);
+        Ticket[] actual = manager.findAllPriceSort(airportFrom, airportTo);
+        assertArrayEquals(expected, actual);
+    }
+//---
+    @Test
+    public void ShouldFoundAllPriceSort(){
+        String airportFrom = "DME";
+        String airportTo = "SVX";
+
+        Ticket[] expected = new Ticket[]{second, fourth, fifth};
+        Ticket[] actual = manager.findAllPriceSort(airportFrom, airportTo);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void ShouldFoundAllTimeSort(){
+        String airportFrom = "DME";
+        String airportTo = "SVX";
+        Comparator<Ticket> comparator = new TicketByPriceComparator();
+
+        Ticket[] expected = new Ticket[]{second, fourth, fifth};
+        Ticket[] actual = manager.findAllTimeSort(airportFrom, airportTo, comparator);
         assertArrayEquals(expected, actual);
     }
 
